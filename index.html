@@ -31,19 +31,14 @@
 
 <ol>
 <li># Install GRID Certificate on HEP</li>
-<li><h1>
-<a id="monitoring-jobs" class="anchor" href="#monitoring-jobs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Monitoring Jobs</h1></li>
-<li>
-<h1>
-<a id="rucio" class="anchor" href="#rucio" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rucio</h1>
-
-<p>setupATLAS
+<li># Monitoring Jobs</li>
+<li># Rucio
+<code>setupATLAS
 voms-proxy-init -voms atlas
 localSetupRucioClients
 rucio list-dids user.whatever_name:*                % list all dids in that user's folder
-rucio list-dids user.whatever_name:<em>some_string</em>    % list all dids in that user's folder that contain 'some_string' in their name
-rucio download user.whatever_name:user.whatever_name.whatever_fileorfolder    % download stuff from the GRID</p>
-</li>
+rucio list-dids user.whatever_name:*some_string*    % list all dids in that user's folder that contain 'some_string' in their name
+rucio download user.whatever_name:user.whatever_name.whatever_fileorfolder    % download stuff from the GRID</code> </li>
 </ol>
 
       <footer class="site-footer">
