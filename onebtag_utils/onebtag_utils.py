@@ -41,19 +41,22 @@ def pair_highestPt(df_1btag, btag_branch, pt_branch):
 
     for event in df_1btag.index.values:
 
-        if event%10000 == 0:
-            print 'Processing event {} of {}'.format(event, df_1btag.shape[0])
+        # -- only select events with at least 2 jets:
+        if (df_1btag[pt_branch].at[event].shape[0] > 1):
 
-        # -- find the second jet among the non b-tagged ones by picking the one with highest pT:
-        selected_index = np.argmax((df_1btag[pt_branch].at[event])[(df_1btag[btag_branch].at[event]) == 0])
-        # -- get the index of the b-jet that is already b-tagged
-        firstjet_index = np.argmax(df_1btag[btag_branch].at[event])
-        
-        # -- shift the index of the selected jet by 1 if it comes after the one that is already b-tagged
-        if firstjet_index <= selected_index:
-            selected_index += 1  
+            if event%10000 == 0:
+                print 'Processing event {} of {}'.format(event, df_1btag.shape[0])
 
-        pair_indices.append(np.sort([firstjet_index, selected_index]))
+            # -- find the second jet among the non b-tagged ones by picking the one with highest pT:
+            selected_index = np.argmax((df_1btag[pt_branch].at[event])[(df_1btag[btag_branch].at[event]) == 0])
+            # -- get the index of the b-jet that is already b-tagged
+            firstjet_index = np.argmax(df_1btag[btag_branch].at[event])
+            
+            # -- shift the index of the selected jet by 1 if it comes after the one that is already b-tagged
+            if firstjet_index <= selected_index:
+                selected_index += 1  
+
+            pair_indices.append(np.sort([firstjet_index, selected_index]))
 
     return pair_indices
 
