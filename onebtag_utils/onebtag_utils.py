@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd 
+
 def cutEvents_1btag(df, btag_branch):
     '''
     Args:
