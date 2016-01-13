@@ -19,6 +19,6 @@ setup(
     author='Michela Paganini',
     author_email='michela.paganini@yale.edu',
     url='https://github.com/mickypaganini/YaleATLAS',
-    install_requires=['pandas', 'numpy'],
+    install_requires=['pandas', 'numpy', 'rootpy'],
     packages=find_packages()
 )

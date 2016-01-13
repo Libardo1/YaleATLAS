@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd 
+from rootpy.vector import LorentzVector
 
 def cutEvents_1btag(df, btag_branch):
     '''
@@ -15,8 +16,15 @@ def cutEvents_1btag(df, btag_branch):
 
     '''
 
-    # -- slice df by only considering events with == 1 b-tagged jet:
-    df_1btag = df[np.asarray([np.sum(event) for event in df[btag_branch]]) == 1]
+    # -- slice df by only considering events with at least 2 jets, and == 1 b-tagged jet:
+    #df_1btag = df[np.asarray([np.sum(event) for event in df[btag_branch]]) == 1]
+    
+    slicing = np.logical_and( 
+        np.asarray([np.sum(event) for event in df[btag_branch]]) == 1, 
+        np.asarray([len(event) for event in df[btag_branch]]) > 1 
+    )
+
+    df_1btag = df[slicing]
 
     return df_1btag
 
@@ -41,22 +49,19 @@ def pair_highestPt(df_1btag, btag_branch, pt_branch):
 
     for event in df_1btag.index.values:
 
-        # -- only select events with at least 2 jets:
-        if (df_1btag[pt_branch].at[event].shape[0] > 1):
+        if event%10000 == 0:
+            print 'Processing event {} of {}'.format(event, np.max(df_1btag.index.values))
 
-            if event%10000 == 0:
-                print 'Processing event {} of {}'.format(event, df_1btag.shape[0])
+        # -- find the second jet among the non b-tagged ones by picking the one with highest pT:
+        selected_index = np.argmax((df_1btag[pt_branch].at[event])[(df_1btag[btag_branch].at[event]) == 0])
+        # -- get the index of the b-jet that is already b-tagged
+        firstjet_index = np.argmax(df_1btag[btag_branch].at[event])
+        
+        # -- shift the index of the selected jet by 1 if it comes after the one that is already b-tagged
+        if firstjet_index <= selected_index:
+            selected_index += 1  
 
-            # -- find the second jet among the non b-tagged ones by picking the one with highest pT:
-            selected_index = np.argmax((df_1btag[pt_branch].at[event])[(df_1btag[btag_branch].at[event]) == 0])
-            # -- get the index of the b-jet that is already b-tagged
-            firstjet_index = np.argmax(df_1btag[btag_branch].at[event])
-            
-            # -- shift the index of the selected jet by 1 if it comes after the one that is already b-tagged
-            if firstjet_index <= selected_index:
-                selected_index += 1  
-
-            pair_indices.append(np.sort([firstjet_index, selected_index]))
+        pair_indices.append(np.sort([firstjet_index, selected_index]))
 
     return pair_indices
 
@@ -85,7 +90,7 @@ def pair_HiggsMass(df_1btag, btag_branch, pt_branch, eta_branch, phi_branch, m_b
     for event in df_1btag.index.values:
 
         if event%10000 == 0:
-            print 'Processing event {} of {}'.format(event, df_1btag.shape[0])
+            print 'Processing event {} of {}'.format(event, np.max(df_1btag.index.values))
             
         # -- find the second jet among the non b-tagged ones by picking the one that gives the reco mass closest to 125 GeV:
         firstjet_index = np.argmax(df_1btag[btag_branch].at[event])
@@ -100,7 +105,7 @@ def pair_HiggsMass(df_1btag, btag_branch, pt_branch, eta_branch, phi_branch, m_b
         )
 
         # -- total number of jets per event
-        njets = (df_1btag[[pt_branch]].at[event]).shape[0]
+        njets = (df_1btag[pt_branch].at[event]).shape[0]
         
         # -- ugly, find better way?
         diff = 999999999999
