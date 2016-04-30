@@ -30,28 +30,34 @@
 <a id="grid" class="anchor" href="#grid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GRID</h2>
 
 <ol>
-<li># Install GRID Certificate on lxplus</li>
-</ol>
+<li>
+<h1>
+<a id="install-grid-certificate-on-lxplus-" class="anchor" href="#install-grid-certificate-on-lxplus-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install GRID Certificate on lxplus <br>
+</h1>
 
-<p>Request a new certificate here: <a href="https://ca.cern.ch/ca/">https://ca.cern.ch/ca/</a> </p>
+<p>Request a new certificate here: <a href="https://ca.cern.ch/ca/">https://ca.cern.ch/ca/</a> <br>
+Once you have exported your certificate in .pem format, <code>scp</code> it to your <code>~/.globus/</code> folder and follow the simple instructions here:
+<a href="https://twiki.cern.ch/twiki/bin/view/Atlas/ObtainingGridCertificateAndVO#Prepare_the_certificate_to_run_o">https://twiki.cern.ch/twiki/bin/view/Atlas/ObtainingGridCertificateAndVO#Prepare_the_certificate_to_run_o</a> <br></p>
+</li>
+<li>
+<h1>
+<a id="monitoring-jobs-" class="anchor" href="#monitoring-jobs-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Monitoring Jobs <br>
+</h1>
 
-<p>Once you have exported your certificate in .pem format, <code>scp</code> it to your <code>~/.globus/</code> folder and follow the simple instructions here:
-<a href="https://twiki.cern.ch/twiki/bin/view/Atlas/ObtainingGridCertificateAndVO#Prepare_the_certificate_to_run_o">https://twiki.cern.ch/twiki/bin/view/Atlas/ObtainingGridCertificateAndVO#Prepare_the_certificate_to_run_o</a></p>
+<p>You can monitor your grid submissions by going to <a href="http://bigpanda.cern.ch/">http://bigpanda.cern.ch/</a> and entering your full name under "User".<br></p>
+</li>
+<li>
+<h1>
+<a id="rucio-" class="anchor" href="#rucio-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rucio <br>
+</h1>
 
-<ol>
-<li># Monitoring Jobs</li>
-</ol>
-
-<p>You can monitor your grid submissions by going to <a href="http://bigpanda.cern.ch/">http://bigpanda.cern.ch/</a> and entering your full name under "User".</p>
-
-<ol>
-<li># Rucio
-<code>setupATLAS</code>
-<code>voms-proxy-init -voms atlas</code>
-<code>localSetupRucioClients</code>
-<code>rucio list-dids user.whatever_name:*</code>                % list all dids in that user's folder
-<code>rucio list-dids user.whatever_name:*some_string*</code>    % list all dids in that user's folder that contain 'some_string' in their name
-<code>rucio download user.whatever_name:user.whatever_name.whatever_fileorfolder</code>    % download stuff from the GRID` </li>
+<p><code>setupATLAS</code> <br>
+<code>voms-proxy-init -voms atlas</code> <br>
+<code>localSetupRucioClients</code> <br>
+<code>rucio list-dids user.whatever_name:*</code>                 % list all dids in that user's folder <br>
+<code>rucio list-dids user.whatever_name:*some_string*</code>     % list all dids in that user's folder that contain 'some_string' in their name <br>
+<code>rucio download user.whatever_name:user.whatever_name.whatever_fileorfolder</code>    % download stuff from the GRID <br> </p>
+</li>
 </ol>
 
       <footer class="site-footer">
