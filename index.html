@@ -20,25 +20,38 @@
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-the-yale-atlas-fep-page" class="anchor" href="#welcome-to-the-yale-atlas-fep-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to the Yale ATLAS F.E.P. Page</h3>
+<a id="welcome-to-the-yale-atlas-fep-page" class="anchor" href="#welcome-to-the-yale-atlas-fep-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to the Yale ATLAS F.E.P. Page</h3>
 
 <p>On this website, you will find a list of previously and frequently encountered problems along with their solution. The goal of this page is to learn from other graduate students' errors and quickly solve common issues. As the content grows, it will be organized in sections according to themes. </p>
 
 <p>This page is curated by <a href="https://github.com/mickypaganini" class="user-mention">@mickypaganini</a>. Get in contact to obtain editor access or to point out typos or malfunctioning solutions.</p>
 
 <h2>
-<a id="grid" class="anchor" href="#grid" aria-hidden="true"><span class="octicon octicon-link"></span></a>GRID</h2>
+<a id="grid" class="anchor" href="#grid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GRID</h2>
 
 <ol>
-<li># Install GRID Certificate on HEP</li>
+<li># Install GRID Certificate on lxplus</li>
+</ol>
+
+<p>Request a new certificate here: <a href="https://ca.cern.ch/ca/">https://ca.cern.ch/ca/</a> </p>
+
+<p>Once you have exported your certificate in .pem format, <code>scp</code> it to your <code>~/.globus/</code> folder and follow the simple instructions here:
+<a href="https://twiki.cern.ch/twiki/bin/view/Atlas/ObtainingGridCertificateAndVO#Prepare_the_certificate_to_run_o">https://twiki.cern.ch/twiki/bin/view/Atlas/ObtainingGridCertificateAndVO#Prepare_the_certificate_to_run_o</a></p>
+
+<ol>
 <li># Monitoring Jobs</li>
+</ol>
+
+<p>You can monitor your grid submissions by going to <a href="http://bigpanda.cern.ch/">http://bigpanda.cern.ch/</a> and entering your full name under "User".</p>
+
+<ol>
 <li># Rucio
 <code>setupATLAS</code>
-voms-proxy-init -voms atlas
-localSetupRucioClients
-rucio list-dids user.whatever_name:*                % list all dids in that user's folder
-rucio list-dids user.whatever_name:<em>some_string</em>    % list all dids in that user's folder that contain 'some_string' in their name
-rucio download user.whatever_name:user.whatever_name.whatever_fileorfolder    % download stuff from the GRID` </li>
+<code>voms-proxy-init -voms atlas</code>
+<code>localSetupRucioClients</code>
+<code>rucio list-dids user.whatever_name:*</code>                % list all dids in that user's folder
+<code>rucio list-dids user.whatever_name:*some_string*</code>    % list all dids in that user's folder that contain 'some_string' in their name
+<code>rucio download user.whatever_name:user.whatever_name.whatever_fileorfolder</code>    % download stuff from the GRID` </li>
 </ol>
 
       <footer class="site-footer">
