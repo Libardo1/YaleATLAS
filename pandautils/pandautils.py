@@ -27,7 +27,7 @@ def root2panda(file_paths, tree_name, **kwargs):
     else:
         files = [matched_f for f in file_paths for matched_f in glob.glob(f)]
 
-    ss = stack_arrays([root2array(fpath, tree_name, **kwargs).view(np.recarray) for fpath in files])
+    ss = stack_arrays([root2rec(fpath, tree_name, **kwargs) for fpath in files])
     try:
         return pd.DataFrame(ss)
     except Exception:
