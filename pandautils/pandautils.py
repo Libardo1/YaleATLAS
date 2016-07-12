@@ -73,12 +73,15 @@ def match_shape(arr, ref):
     --------
         arr in the shape of ref
     '''
-    shape = [len(a) for a in ref]
-    if len(arr) != np.sum(shape):
-        raise ValueError('Incompatible shapes: len(arr) = {}, total elements in ref: {}'.format(len(arr), np.sum(shape)))
-#     reorganized = []
-#     ptr = 0
-#     for nobj in shape:
-#         reorganized.append(twoclass_output[ptr:(ptr + nobj)].astype('float32').tolist())
-#         ptr += nobj   
-    return [arr[ptr:(ptr + nobj)].tolist() for (ptr, nobj) in zip(np.cumsum([0] + shape[:-1]), shape)]    
+    try:
+        shape = [len(a) for a in ref]
+        if len(arr) != np.sum(shape):
+            raise ValueError('Incompatible shapes: len(arr) = {}, total elements in ref: {}'.format(len(arr), np.sum(shape)))
+    #     reorganized = []
+    #     ptr = 0
+    #     for nobj in shape:
+    #         reorganized.append(twoclass_output[ptr:(ptr + nobj)].astype('float32').tolist())
+    #         ptr += nobj   
+        return [arr[ptr:(ptr + nobj)].tolist() for (ptr, nobj) in zip(np.cumsum([0] + shape[:-1]), shape)]
+    except TypeError: # in case `a` or `arr` are not lists but just numbers
+        return arr
